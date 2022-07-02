@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-const count = 100
+const count = 10000000
 
 func main() {
 	for n := 1; n <= count; n++ {
@@ -20,10 +23,17 @@ func isPrimeRegex(num int) bool {
 }
 
 func isPrimeGo(num int) bool {
-	if num == 1 || num == 2 {
+	if num == 1 {
+		return false
+	}
+	if num == 2 {
 		return true
 	}
-	for p := 2; p <= num-1; p++ {
+	if num%2 == 0 {
+		return false
+	}
+	root := int(math.Sqrt(float64(num)))
+	for p := 3; p <= root+1; p += 2 {
 		if num%p == 0 {
 			return false
 		}
