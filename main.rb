@@ -1,10 +1,10 @@
-require 'pry'
-
 COUNT = 10
+CHAR = "x"
+PATTERN = Regexp.compile(/^(?!(#{CHAR}#{CHAR}+)\1+$|^#{CHAR}$)/)
 
 def is_prime_regex(num)
-  chars = "x" * num
-  return /^(?!(xx+)\1+$|^x$)/.match?(chars)
+  chars = CHAR * num
+  return PATTERN.match?(chars)
 end
 
 def is_prime_ruby(num)

@@ -3,16 +3,21 @@ package main
 import (
 	"fmt"
 	"math"
-	"regexp"
 	"strings"
+
+	"github.com/scorpionknifes/go-pcre"
 )
 
-// const count = 10000000
-const count = 10
+const (
+	count = 10000000
+	char  = "x"
+)
+
+var re = pcre.MustCompile(fmt.Sprintf(`^(?!(%s%s+)\1+$|^%s$)`, char, char, char), 0)
 
 func main() {
 	for n := 1; n <= count; n++ {
-		isPrime := isPrimeGo(n)
+		isPrime := isPrimeRegex(n)
 		if isPrime {
 			fmt.Printf("%d is prime\n", n)
 		} else {
@@ -22,12 +27,9 @@ func main() {
 }
 
 func isPrimeRegex(num int) bool {
-	char := "x"
 	chars := strings.Repeat(char, num)
-	// $1が使えない..
-	r := regexp.MustCompile(fmt.Sprintf(`^((%s%s+)\1+$)`, char, char))
-	isNotPrime := r.MatchString(chars)
-	return !isNotPrime
+	isPrime := re.Matcher([]byte(chars), 0).Matches()
+	return isPrime
 }
 
 func isPrimeGo(num int) bool {

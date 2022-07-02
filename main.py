@@ -1,13 +1,12 @@
 import math
 import re
-import pdb
 
 COUNT = 10000000
+CHAR = "x"
+PATTERN = re.compile(f'^(?!({char}{char}+)\\1+$|^{char}$)')
 
 def is_prime_regex(num):
-    char = "x"
-    chars = char * num
-    pattern = re.compile(f'^(?!({char}{char}+)\\1+$|^{char}$)')
+    chars = CHAR * num
     if bool(pattern.search(chars)):
         return True
     else:
