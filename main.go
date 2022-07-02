@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"math"
+	"regexp"
+	"strings"
 )
 
-const count = 10000000
+// const count = 10000000
+const count = 10
 
 func main() {
 	for n := 1; n <= count; n++ {
@@ -19,7 +22,12 @@ func main() {
 }
 
 func isPrimeRegex(num int) bool {
-	return true
+	char := "x"
+	chars := strings.Repeat(char, num)
+	// $1が使えない..
+	r := regexp.MustCompile(fmt.Sprintf(`^((%s%s+)\1+$)`, char, char))
+	isNotPrime := r.MatchString(chars)
+	return !isNotPrime
 }
 
 func isPrimeGo(num int) bool {
