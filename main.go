@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	count = 10000000
+	count = 100000000
 	char  = "x"
 )
 
@@ -17,7 +17,7 @@ var re = pcre.MustCompile(fmt.Sprintf(`^(?!(%s%s+)\1+$|^%s$)`, char, char, char)
 
 func main() {
 	for n := 1; n <= count; n++ {
-		isPrime := isPrimeRegex(n)
+		isPrime := isPrimeGo(n)
 		if isPrime {
 			fmt.Printf("%d is prime\n", n)
 		} else {

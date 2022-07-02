@@ -1,4 +1,4 @@
-COUNT = 10
+COUNT = 100000000
 CHAR = "x"
 PATTERN = Regexp.compile(/^(?!(#{CHAR}#{CHAR}+)\1+$|^#{CHAR}$)/)
 
